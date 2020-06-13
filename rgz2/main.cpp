@@ -17,7 +17,7 @@ int main(int argc, char *argv[]) {
     cfi.FontWeight = FW_NORMAL;
     wcscpy(cfi.FaceName, L"Consolas");
 
-    QString fileName = "../rgz2/img/tree";        //file name
+    QString fileName = "../img/4k";        //file name
     QImage img;
     bool success = img.load(fileName, "JPG" );    //file format
     int step;
@@ -35,7 +35,7 @@ int main(int argc, char *argv[]) {
 
     if (img.height() < 512 || img.width() < 512)
         step = 1;
-    else if (img.height() >= 512 || img.width() > 512)
+    else if (img.height() < 1024 || img.width() < 1024)
         step = 2;
     else if (img.height() <= 2048 || img.width() <= 2048)
         step = 4;
@@ -43,28 +43,37 @@ int main(int argc, char *argv[]) {
         step = 8;
     for (int i = 0; i < img.height(); i += step) {
         for (int j = 0; j < img.width(); j += step) {
-            int pB = img.pixelColor(j,i).value(); // pB = pixel brightness
-            if (pB >= 255)
+           // int pB = img.pixelColor(j,i).value(); // pB = pixel brightness
+
+                int sumPB = 0;
+                for(int y = i; y < i+step; y++){
+                    for(int x = j; x < j+step; x++){
+                        sumPB += img.pixelColor(x,y).value();
+                    }
+                }
+                sumPB /= step * step;
+
+            if (sumPB >= 255)
                 cout << " ";
-            else if( pB > 230)
+            else if( sumPB > 230)
                 cout << ":";
-            else if( pB > 220)
+            else if( sumPB > 220)
                 cout << ";";
-            else if( pB > 190)
+            else if( sumPB > 190)
                 cout << "/";
-            else if( pB > 160)
+            else if( sumPB > 160)
                 cout << "[";
-            else if (pB > 140)
+            else if (sumPB > 140)
                 cout << '=';
-            else if (pB > 125)
+            else if (sumPB > 125)
                 cout << 'a';
-            else if (pB > 80)
+            else if (sumPB > 80)
                 cout << '$';
-            else if (pB > 60)
+            else if (sumPB > 60)
                 cout << '&';
-            else if (pB > 40)
+            else if (sumPB > 40)
                 cout << '%';
-            else if (pB >= 0)
+            else if (sumPB >= 0)
                 cout << '@';
         }
         cout << endl;
