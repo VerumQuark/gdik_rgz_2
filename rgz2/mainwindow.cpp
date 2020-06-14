@@ -30,23 +30,23 @@ int setStep(int h, int w) {
 char getChar (int pb) {
     if (pb >= 255)
         return ' ';
-    if (pb > 230)
+    else if (pb > 230)
         return ':';
-    if (pb > 220)
+    else if (pb > 220)
         return ';';
-    if (pb > 190)
+    else if (pb > 190)
         return '/';
-    if (pb > 160)
+    else if (pb > 160)
         return '[';
-    if (pb > 140)
+    else if (pb > 140)
         return '=';
-    if (pb > 125)
+    else if (pb > 125)
         return 'a';
-    if (pb > 80)
+    else if (pb > 80)
         return '$';
-    if (pb > 60)
+    else if (pb > 60)
         return '&';
-    if (pb > 40)
+    else if (pb > 40)
         return '%';
     return '@';
 }
