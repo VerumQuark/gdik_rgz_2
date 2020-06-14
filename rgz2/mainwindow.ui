@@ -40,11 +40,16 @@
       <height>800</height>
      </rect>
     </property>
+<<<<<<< Updated upstream
     <property name="minimumSize">
      <size>
       <width>800</width>
       <height>800</height>
      </size>
+=======
+    <property name="text">
+     <string/>
+>>>>>>> Stashed changes
     </property>
     <property name="maximumSize">
      <size>
@@ -59,7 +64,11 @@
     <rect>
      <x>0</x>
      <y>0</y>
+<<<<<<< Updated upstream
      <width>1024</width>
+=======
+     <width>1219</width>
+>>>>>>> Stashed changes
      <height>22</height>
     </rect>
    </property>

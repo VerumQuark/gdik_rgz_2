@@ -5,11 +5,11 @@
 #include <QApplication>
 #include <QLabel>
 #include <QPushButton>
-#include <QLayout>
 #include <QFileDialog>
 #include <QImage>
 #include <QString>
 #include <QTextEdit>
+#include <QMessageBox>
 #include <cwchar>
 #include <windows.h>
 #include <iostream>
