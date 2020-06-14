@@ -2,6 +2,14 @@
 <ui version="4.0">
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1219</width>
+    <height>900</height>
+   </rect>
+  </property>
   <property name="minimumSize">
    <size>
     <width>900</width>
@@ -15,7 +23,7 @@
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>410</x>
+      <x>440</x>
       <y>10</y>
       <width>75</width>
       <height>23</height>
@@ -28,34 +36,23 @@
      </size>
     </property>
     <property name="text">
-     <string>Открыть...</string>
+     <string>Open...</string>
     </property>
    </widget>
-   <widget class="QTextEdit" name="textEdit">
+   <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>50</x>
-      <y>40</y>
-      <width>800</width>
-      <height>800</height>
+      <x>10</x>
+      <y>50</y>
+      <width>1641</width>
+      <height>781</height>
      </rect>
     </property>
-<<<<<<< Updated upstream
-    <property name="minimumSize">
-     <size>
-      <width>800</width>
-      <height>800</height>
-     </size>
-=======
     <property name="text">
      <string/>
->>>>>>> Stashed changes
     </property>
-    <property name="maximumSize">
-     <size>
-      <width>631</width>
-      <height>16777215</height>
-     </size>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
   </widget>
@@ -64,11 +61,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-<<<<<<< Updated upstream
-     <width>1024</width>
-=======
      <width>1219</width>
->>>>>>> Stashed changes
      <height>22</height>
     </rect>
    </property>
