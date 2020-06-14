@@ -6,6 +6,12 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    QFont font("MyFont");
+    font.setPointSize(2);
+    font.setStyleHint(QFont::TypeWriter);
+    font.setLetterSpacing (QFont::AbsoluteSpacing,1);
+    QLabel* label = ui->label;
+    label->setFont(font);
 }
 
 MainWindow::~MainWindow() {
@@ -77,11 +83,6 @@ void MainWindow::on_pushButton_clicked() {
     QImage image;
     if (!image.load(fileName, "JPG" ))
         QMessageBox::critical(0,"Error", "Can't upload image");
-    QFont font("MyFont");
-    font.setPointSize(2);
-    font.setStyleHint(QFont::TypeWriter);
-    font.setLetterSpacing (QFont::AbsoluteSpacing,1);
     QLabel* label = ui->label;
-    label->setFont(font);
     label->setText(getArt(image));
 }
