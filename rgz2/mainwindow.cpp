@@ -48,18 +48,21 @@ char getChar (int pb) {
 
 QString getArt(QImage img) {
     QString art;
-    int step=setStep(img.height(),img.width());
-    for (int i = 0; i < img.height(); i += step) {
-        for (int j = 0; j < img.width(); j += step) {
+    int height = img.height();
+    int width = img.width();
+    int step=setStep(height,width);
+    for (int i = 0; i < height; i += step) {
+        for (int j = 0; j < width; j += step) {
             int sumPB = 0;  // sumPB = sum of area pixel brightness
+
             for (int y = i; y < i+step; y++) {
+                if (y >= height)
+                    continue;
                 for (int x = j; x < j+step; x++) {
+                    if(x >= width)
+                        continue;
                     sumPB += img.pixelColor(x,y).value();
-                    if(x > img.width())
-                        break;
                 }
-                if (y > img.height())
-                    break;
             }
             sumPB /= step * step;
             art+=getChar(sumPB);
@@ -79,7 +82,6 @@ void MainWindow::on_pushButton_clicked() {
     font.setStyleHint(QFont::TypeWriter);
     font.setLetterSpacing (QFont::AbsoluteSpacing,1);
     QLabel* label = ui->label;
-    label->setAlignment(Qt::AlignLeft);
     label->setFont(font);
     label->setText(getArt(image));
 }
