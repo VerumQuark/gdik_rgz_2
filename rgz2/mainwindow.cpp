@@ -27,10 +27,6 @@ void MainWindow::on_pushButton_clicked() {
     int step;
 
     QFont font("MyFont");
-    /*if (img.height() <= 512 || img.width() <= 512)
-        font.setPointSize(2);
-    else font.setPointSize(1); // NICHEGO KROME 2 NE RABOTAET!!!!
-    */
     font.setPointSize(2);
     font.setStyleHint(QFont::TypeWriter);
     font.setLetterSpacing (QFont::AbsoluteSpacing,1);
@@ -39,10 +35,10 @@ void MainWindow::on_pushButton_clicked() {
 
     if (img.height() < 512 || img.width() < 512)
         step = 1;
-    else if (img.height() >= 512 || img.width() > 512)
-        step = 2;
-    else if (img.height() <= 2048 || img.width() <= 2048)
+    else if (img.height() <= 1024 || img.width() < 1024)
         step = 4;
+    else if (img.height() <= 2048 || img.width() <= 2048)
+        step = 6;
     else
         step = 8;
     for (int i = 0; i < img.height(); i += step) {
