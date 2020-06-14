@@ -6,7 +6,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    QScrollBar* bar = ui->textEdit->horizontalScrollBar();
+    // QScrollBar* bar = ui->textEdit->horizontalScrollBar();
     //bar->setValue(bar->minimum());
 }
 
@@ -16,10 +16,6 @@ MainWindow::~MainWindow() {
 
 QString boolStr(bool b) {
     return b ? "true" : "false";
-}
-
-void MainWindow::printStr(QString s) {
-    ui->textEdit->insertPlainText(s);
 }
 
 void MainWindow::on_pushButton_clicked() {
@@ -38,8 +34,8 @@ void MainWindow::on_pushButton_clicked() {
     font.setPointSize(2);
     font.setStyleHint(QFont::TypeWriter);
     font.setLetterSpacing (QFont::AbsoluteSpacing,1);
-    ui->textEdit->setCurrentFont(font);
-    ui->textEdit->insertPlainText("Image load status:"+boolStr(success)+"\n");
+
+    QString art;
 
     if (img.height() < 512 || img.width() < 512)
         step = 1;
@@ -51,30 +47,43 @@ void MainWindow::on_pushButton_clicked() {
         step = 8;
     for (int i = 0; i < img.height(); i += step) {
         for (int j = 0; j < img.width(); j += step) {
-            int pB = img.pixelColor(j,i).value(); // pB = pixel brightness
-            if (pB >= 255)
-                printStr(" "); // space
-            else if( pB > 230)
-                printStr(":"); //:
-            else if( pB > 220)
-                printStr(";"); //;
-            else if( pB > 190)
-                printStr("/"); // /
-            else if( pB > 160)
-                printStr("["); // [
-            else if (pB > 140)
-                printStr("="); // =
-            else if (pB > 125)
-                printStr("a"); // a
-            else if (pB > 80)
-                printStr("$"); // $
-            else if (pB > 60)
-                printStr("&"); // &
-            else if (pB > 40)
-                printStr("%"); // %
-            else if (pB >= 0)
-                printStr("@"); // @
+
+            int sumPB = 0;  // sumPB = sum of area pixel brightness
+            for(int y = i; y < i+step; y++){
+                for(int x = j; x < j+step; x++){
+                    sumPB += img.pixelColor(x,y).value();
+                }
+            }
+            sumPB /= step * step;
+
+            if (sumPB >= 255)
+                art+=' ';         // space
+            else if( sumPB > 230)
+                art+=':';         //:
+            else if( sumPB > 220) 
+                art+=';';         //;
+            else if( sumPB > 190) 
+                art+='/';         // /
+            else if( sumPB > 160)
+                art+='[';         // [
+            else if (sumPB > 140)
+                art+='=';         // =
+            else if (sumPB > 125)
+                art+='a';         // a
+            else if (sumPB > 80)
+                art+='$';         // $
+            else if (sumPB > 60)
+                art+='&';         // &
+            else if (sumPB > 40)
+                art+='%';         // %
+            else if (sumPB >= 0)
+                art+='@';         // @
         }
-        printStr("\n");
+        art+='\n';
     }
+
+        QLabel* label = ui->label;
+        label->setFont(font);
+        label->setText(art);
+
 }
