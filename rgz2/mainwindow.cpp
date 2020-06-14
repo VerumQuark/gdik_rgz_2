@@ -10,8 +10,7 @@ MainWindow::MainWindow(QWidget *parent)
     font.setPointSize(2);
     font.setStyleHint(QFont::TypeWriter);
     font.setLetterSpacing (QFont::AbsoluteSpacing,1);
-    QLabel* label = ui->label;
-    label->setFont(font);
+    ui->label->setFont(font);
 }
 
 MainWindow::~MainWindow() {
@@ -30,26 +29,26 @@ int setStep(int h, int w) {
 
 char getChar (int pb) {
     if (pb >= 255)
-        return ' ';         // space
+        return ' ';
     if (pb > 230)
-        return ':';         //:
+        return ':';
     if (pb > 220)
-        return ';';         //;
+        return ';';
     if (pb > 190)
-        return '/';         // /
+        return '/';
     if (pb > 160)
-        return '[';         // [
+        return '[';
     if (pb > 140)
-        return '=';         // =
+        return '=';
     if (pb > 125)
-        return 'a';         // a
+        return 'a';
     if (pb > 80)
-        return '$';         // $
+        return '$';
     if (pb > 60)
-        return '&';         // &
+        return '&';
     if (pb > 40)
-        return '%';         // %
-    return '@';             // @
+        return '%';
+    return '@';
 }
 
 QString getArt(QImage img) {
@@ -83,6 +82,5 @@ void MainWindow::on_pushButton_clicked() {
     QImage image;
     if (!image.load(fileName, "JPG" ))
         QMessageBox::critical(0,"Error", "Can't upload image");
-    QLabel* label = ui->label;
-    label->setText(getArt(image));
+    ui->label->setText(getArt(image));
 }
