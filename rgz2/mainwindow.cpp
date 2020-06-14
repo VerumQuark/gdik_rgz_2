@@ -22,9 +22,7 @@ int setStep(int h, int w) {
         return 1;
     else if (h <= 1024 || w < 1024)
         return 4;
-    else if (h <= 2048 || w <= 2048)
-        return 6;
-    else return 8;
+    else return 0;
 }
 
 char getChar (int pb) {
@@ -51,15 +49,13 @@ char getChar (int pb) {
     return '@';
 }
 
-QString getArt(QImage img) {
+QString getArt(QImage img, int step) {
     QString art;
     int height = img.height();
     int width = img.width();
-    int step=setStep(height,width);
     for (int i = 0; i < height; i += step) {
         for (int j = 0; j < width; j += step) {
             int sumPB = 0;  // sumPB = sum of area pixel brightness
-
             for (int y = i; y < i+step; y++) {
                 if (y >= height)
                     continue;
@@ -80,7 +76,11 @@ QString getArt(QImage img) {
 void MainWindow::on_pushButton_clicked() {
     QString fileName = QFileDialog::getOpenFileName(this, tr("Upload Image"), "", "*.jpg");
     QImage image;
+    int st=0;
     if (!image.load(fileName, "JPG" ))
         QMessageBox::critical(0,"Error", "Can't upload image");
-    ui->label->setText(getArt(image));
+    else st = setStep(image.height(),image.width());
+    if (st==0)
+        QMessageBox::critical(0,"Error", "Image too big");
+    else ui->label->setText(getArt(image,st));
 }
